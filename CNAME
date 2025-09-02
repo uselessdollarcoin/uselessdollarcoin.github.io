@@ -1,1 +1,4 @@
-uselessdollarcoin.cash
+Type: CNAME
+Host: www
+Value: uselessdollarcoin.github.io
+TTL: Auto
