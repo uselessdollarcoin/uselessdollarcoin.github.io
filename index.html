@@ -1,0 +1,677 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$USDC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f9c44a 0%);
+            min-height: 100vh;
+            color: black;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.2); }
+            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.4); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            overflow-wrap: break-word;
+        }
+
+        .price-display {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .change {
+            font-size: 1.2rem;
+            color: #81C784;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .feature-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 60px 0;
+            text-align: center;
+            border-left: 5px solid #FFD700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .floating-coins {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .coin {
+            position: absolute;
+            color: rgba(255,255,255,0.1);
+            font-size: 2rem;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            .price {
+                font-size: 2rem;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-coins"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">$USDC</div>
+            <div class="subtitle">The Most Unstable Useless Coin on the Bonk Ecosystem</div>
+            <div class="subtitle">CA: FwnQ5RU5ZULg2m1QzMA5cE8g3PzuGJ8uET9CPXedbonk </div>
+        </header>
+
+        <div class="price-display">
+            <div class="price">$0.998</div>
+            <div>📊 Loading real-time data...</div>
+            <div style="margin-top: 15px; opacity: 0.8;">
+                <span id="market-cap">Market Cap: Loading...</span> | <span id="volume">Volume: Loading...</span>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">😴</div>
+                <div class="feature-title">Absolutely Unstable</div>
+                <div class="feature-description">
+                   Wild price swings! 1000x gains! It's like the most unstable girlfriend you've ever had. How useless is that?!
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏦</div>
+                <div class="feature-title">Unregulated as fuck</div>
+                <div class="feature-description">
+                    Not backed by actual US dollars in real banks. Not audited monthly. Not fully compliant with US regulations. No rug pulls, no drama, just... pure instability.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">Globally Accepted</div>
+                <div class="feature-description">
+                    Will soon be available on every major exchange, accepted everywhere. Works perfectly for payments, DeFi, and trading. So mainstream. So... useless!
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Unstable Transfers</div>
+                <div class="feature-description">
+                    Send money anywhere in seconds for pennies. No waiting, no crazy fees. Just efficient, unreliable transfers. 
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Uselessly Secure</div>
+                <div class="feature-description">
+                    Built ontop of the Bonk ecosystem. Your funds are safer than in traditional banks. So secure it's... boring. No hacks, no exploits, just useless.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">Unstable Volatility</div>
+                <div class="feature-description">
+                   Price action is like a rollercoaster! Panic attacks from price charts! Just unsteady, unreliable value preservation.
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Utility</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$0.998</div>
+                <div class="stat-label">Forever Price</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Potentially Millions</div>
+                <div class="stat-label"># of Holders</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Potentially 100+</div>
+                <div class="stat-label">Countries availible</div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <h3 style="margin-bottom: 20px;">⚠️ USELESS DISCLAIMER ⚠️</h3>
+            <p>
+                $USDC is not backed by fully reserved assets, is not held in segregated accounts with US regulated financial institutions. 
+                Each USDC is not redeemable 1:1 for US dollars. Boring monthly attestations available. 
+                This is financial advice: it's an unstable coin, it does exactly what it says on the tin. 
+                Revolutionary concept, we know. 🙄
+            </p>
+            <p style="margin-top: 15px; font-style: italic;">
+                Side effects may include: financial instability, restless sleep, and worrying about your next rent payment. 
+                Consult your local degen if you experience sudden urges to make irresponsible financial decisions.
+            </p>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="margin-bottom: 30px;">Join The Most Unstable & Useless Revolution</h2>
+            <a class="cta-button" href="https://dexscreener.com/solana/djaajczwnhb7grexcrh7zufryvyqrbaeversih6d3f4v"> 
+                GET $USDC NOW 💤
+            </a>
+        </div>
+
+        <div class="social-links">
+            <a class="social-link" title="Twitter" href="https://x.com/i/communities/1952444966082412851">𝕏</a>
+            <a  class="social-link" title="Telegram"href="https://t.me/usdc_cto1">📱</a>
+            <a class="social-link" title="Discord"href="https://discord.com/invite/NnQsT9kEzY">🤖</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 $USDC - The Coin That Actually Works</p>
+            <p style="margin-top: 10px; opacity: 0.7;">
+                Not affiliated with circus coins, dog coins, or any coins named after bodily functions.
+                Just a boring, stable, actually useful digital dollar. Revolutionary, right? 😴
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating coins animation
+        function createFloatingCoin() {
+            const coin = document.createElement('div');
+            coin.textContent = '$';
+            coin.className = 'coin';
+            coin.style.left = Math.random() * 100 + '%';
+            coin.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            coin.style.animationDelay = Math.random() * 5 + 's';
+            
+            document.querySelector('.floating-coins').appendChild(coin);
+            
+            setTimeout(() => {
+                coin.remove();
+            }, 20000);
+        }
+
+        // Create coins periodically
+        setInterval(createFloatingCoin, 2000);
+        
+        // Initial coins
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingCoin, i * 400);
+        }
+
+        // Add some interactive elements
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const messages = [
+                    "Wow, such stability! 📊",
+                    "Revolutionary $1.00 technology! 💤",
+                    "This changes everything... by changing nothing! 🤷‍♂️",
+                    "The future of boring! 😴",
+                    "Disrupting the volatility industry! 📈➡️📊"
+                ];
+                alert(messages[Math.floor(Math.random() * messages.length)]);
+            });
+        });
+
+        // Real USDC price data from DexScreener
+        let lastPrice = 1.0000;
+        let priceHistory = [];
+        
+        async function fetchUSDCPrice() {
+            try {
+                // Try DexScreener API first (USDC/ETH pair on Ethereum)
+                const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/0xA0b86a33E6441955C71a4c5e3d9a76E2Cb8b0F38');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.pairs && data.pairs.length > 0) {
+                        // Find USDC pair (usually paired with ETH or USDT)
+                        const usdcPair = data.pairs.find(pair => 
+                            pair.baseToken.symbol === 'USDC' || 
+                            pair.quoteToken.symbol === 'USDC'
+                        ) || data.pairs[0];
+                        
+                        let price = parseFloat(usdcPair.priceUsd || usdcPair.priceNative || 1.0);
+                        
+                        // If USDC is the quote token, we need the inverse
+                        if (usdcPair.quoteToken.symbol === 'USDC') {
+                            price = 1.0; // USDC should always be $1
+                        }
+                        
+                        updatePriceDisplay(price);
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.log('DexScreener API failed, using fallback method:', error);
+            }
+            
+            // Fallback: Try CoinGecko API as backup
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd&include_24hr_change=true');
+                if (response.ok) {
+                    const data = await response.json();
+                    const price = data['usd-coin']?.usd || 1.0;
+                    const change24h = data['usd-coin']?.usd_24h_change || 0;
+                    updatePriceDisplay(price, change24h);
+                    return;
+                }
+            } catch (error) {
+                console.log('CoinGecko API also failed:', error);
+            }
+            
+            // Ultimate fallback: Show stable price with satirical message
+            simulateStablePrice();
+        }
+        
+        function updatePriceDisplay(currentPrice, change24h = null) {
+            const priceElement = document.querySelector('.price');
+            const changeElement = document.querySelector('.change');
+            
+            // Calculate change from last price if not provided
+            if (change24h === null) {
+                const priceChange = currentPrice - lastPrice;
+                const percentChange = lastPrice > 0 ? (priceChange / lastPrice) * 100 : 0;
+                change24h = percentChange;
+            }
+            
+            // Store price in history
+            priceHistory.push(currentPrice);
+            if (priceHistory.length > 100) priceHistory.shift();
+            
+            // Update display
+            priceElement.textContent = `${currentPrice.toFixed(4)}`;
+            
+            const changeSign = change24h >= 0 ? '+' : '';
+            const changeColor = Math.abs(change24h) < 0.01 ? '#4CAF50' : (change24h >= 0 ? '#4CAF50' : '#f44336');
+            
+            changeElement.innerHTML = `📊 24h Change: ${changeSign}${change24h.toFixed(4)}% <span style="color: ${changeColor}">(${(currentPrice * change24h / 100).toFixed(6)})</span>`;
+            
+            // Add satirical commentary based on price stability
+            const volatility = calculateVolatility();
+            addSatiricalCommentary(volatility, currentPrice);
+            
+            lastPrice = currentPrice;
+        }
+        
+        function calculateVolatility() {
+            if (priceHistory.length < 2) return 0;
+            
+            const mean = priceHistory.reduce((sum, price) => sum + price, 0) / priceHistory.length;
+            const variance = priceHistory.reduce((sum, price) => sum + Math.pow(price - mean, 2), 0) / priceHistory.length;
+            return Math.sqrt(variance);
+        }
+        
+        function addSatiricalCommentary(volatility, price) {
+            const commentaryElement = document.querySelector('.price-display');
+            let existingCommentary = commentaryElement.querySelector('.satirical-commentary');
+            
+            if (!existingCommentary) {
+                existingCommentary = document.createElement('div');
+                existingCommentary.className = 'satirical-commentary';
+                existingCommentary.style.cssText = 'margin-top: 15px; font-style: italic; opacity: 0.8; font-size: 0.9rem;';
+                commentaryElement.appendChild(existingCommentary);
+            }
+            
+            let commentary = '';
+            
+            if (volatility < 0.001) {
+                commentary = '🎯 Wow! Such stability! The price moved by ' + (volatility * 1000).toFixed(3) + ' thousandths! Revolutionary! 😴';
+            } else if (volatility < 0.01) {
+                commentary = '🎢 Hold onto your hats! This ' + (volatility * 100).toFixed(2) + '% volatility is absolutely wild! 📈💤';
+            } else if (Math.abs(price - 1.0) > 0.05) {
+                commentary = '🚨 BREAKING: USDC deviates from $1.00! The financial world is in chaos! (by 
+    </script>
+</body>
+</html>
+<script>
++ Math.abs(price - 1.0).toFixed(4) + ') 🚨';
+            } else {
+                const messages = [
+                    '💤 Another exciting day in stablecoin land! Price action that would make a rock jealous!',
+                    '🎯 Laser-focused on that $1.00 target! Such precision! Much stable! Wow!',
+                    '📊 Technical analysis shows strong support at $1.00 and resistance at... $1.00! 🤓',
+                    '🌊 Riding the waves of... absolute stability! Hang ten, dude! 🏄‍♂️',
+                    '🔥 This price action is so hot it\'s... room temperature! 🌡️'
+                ];
+                commentary = messages[Math.floor(Math.random() * messages.length)];
+            }
+            
+            existingCommentary.textContent = commentary;
+        }
+        
+        function simulateStablePrice() {
+            // When APIs fail, show the most stable price ever with commentary
+            const priceElement = document.querySelector('.price');
+            const changeElement = document.querySelector('.change');
+            
+            priceElement.textContent = '$1.0000';
+            changeElement.innerHTML = '📊 24h Change: +0.0000% <span style="color: #4CAF50">($0.000000)</span>';
+            
+            const commentaryElement = document.querySelector('.price-display');
+            let existingCommentary = commentaryElement.querySelector('.satirical-commentary');
+            
+            if (!existingCommentary) {
+                existingCommentary = document.createElement('div');
+                existingCommentary.className = 'satirical-commentary';
+                existingCommentary.style.cssText = 'margin-top: 15px; font-style: italic; opacity: 0.8; font-size: 0.9rem;';
+                commentaryElement.appendChild(existingCommentary);
+            }
+            
+            existingCommentary.textContent = '🔌 API disconnected, but don\'t worry - USDC is probably still exactly $1.00 because... it\'s USDC! 😴💤';
+        }
+        
+        // Fetch price immediately and then every 30 seconds
+        fetchUSDCPrice();
+        setInterval(fetchUSDCPrice, 30000);
+        
+        // Add loading indicator
+        const priceElement = document.querySelector('.price');
+        priceElement.style.transition = 'all 0.3s ease';
+        
+        // Add pulse animation when updating
+        function addUpdateAnimation() {
+            priceElement.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                priceElement.style.transform = 'scale(1)';
+            }, 300);
+        }
+    </script>
+        <script> 
+
+// Real USDC price data from DexScreener
+        let lastPrice = 1.0000;
+        let priceHistory = [];
+        
+        async function fetchUSDCPrice() {
+            try {
+                // Try multiple APIs for comprehensive data
+                await Promise.allSettled([
+                    fetchFromCoinGecko(),
+                    fetchFromDexScreener(),
+                    fetchMarketData()
+                ]);
+            } catch (error) {
+                console.log('All APIs failed, using fallback:', error);
+                simulateStablePrice();
+            }
+        }
+        
+        async function fetchFromCoinGecko() {
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd&include_24hr_change=true&include_market_cap=true&include_24hr_vol=true');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const usdcData = data['usd-coin'];
+                    
+                    if (usdcData) {
+                        const price = usdcData.usd || 1.0;
+                        const change24h = usdcData.usd_24h_change || 0;
+                        const marketCap = usdcData.usd_market_cap;
+                        const volume24h = usdcData.usd_24h_vol;
+                        
+                        updatePriceDisplay(price, change24h);
+                        updateMarketData(marketCap, volume24h);
+                        return true;
+                    }
+                }
+            } catch (error) {
+                console.log('CoinGecko API failed:', error);
+            }
+            return false;
+        }
+        
+        async function fetchFromDexScreener() {
+            try {
+                // USDC contract address on Ethereum
+                const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/0xA0b86a33E6441955C71a4c5e3d9a76E2Cb8b0F38');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.pairs && data.pairs.length > 0) {
+                        // Find the most liquid USDC pair
+                        const usdcPair = data.pairs
+                            .filter(pair => pair.baseToken.symbol === 'USDC' || pair.quoteToken.symbol === 'USDC')
+                            .sort((a, b) => parseFloat(b.volume?.h24 || 0) - parseFloat(a.volume?.h24 || 0))[0];
+                        
+                        if (usdcPair) {
+                            let price = parseFloat(usdcPair.priceUsd || 1.0);
+                            const priceChange24h = parseFloat(usdcPair.priceChange?.h24 || 0);
+                            
+                            // Additional satirical commentary for DexScreener data
+                            addDexScreenerCommentary(usdcPair);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log('DexScreener API failed:', error);
+            }
+        }
+        
+        async function fetchMarketData() {
+            // Backup market cap data from alternative source
+            try {
+                const response = await fetch('https://api.coinpaprika.com/v1/coins/usdc-usd-coin');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.quotes && data.quotes.USD) {
+                        const marketCap = data.quotes.USD.market_cap;
+                        const volume24h = data.quotes.USD.volume_24h;
+                        updateMarketData(marketCap, volume24h);
+                    }
+                }
+            } catch (error) {
+                console.log('Coinpaprika API failed:', error);
+            }
+        }
+        
+        function updatePriceDisplay(currentPrice, change24h = null) {
+            const priceElement = document.querySelector('.price');
+            const changeElement = document.querySelector('.change');
+            
+            // Add update animation
+            addUpdateAnimation();
+            
+            // Calculate change from last price if not provided
+            if (change24h === null && lastPrice > 0) {
+                const priceChange = currentPrice - lastPrice;
+                const percentChange = (priceChange / lastPrice) * 100;
+                change24h = percentChange;
+            } else if (change24h === null) {
+                change24h = 0;
+            }
+            
+            // Store price in history
+            priceHistory.push(currentPrice);
+            if (priceHistory.length > 100) priceHistory.shift();
+            
+            // Update display
+            priceElement.textContent = `${currentPrice.toFixed(4)}`;
+        </script>
+</body>
+</html>
