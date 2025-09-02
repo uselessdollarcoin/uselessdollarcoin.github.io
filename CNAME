@@ -1,4 +1,15 @@
-Type: CNAME
+Type: A
 Host: www
-Value: uselessdollarcoin.github.io
-TTL: Automatic
+Value: 185.199.108.153
+
+Type: A
+Host: www  
+Value: 185.199.109.153
+
+Type: A
+Host: www
+Value: 185.199.110.153
+
+Type: A
+Host: www
+Value: 185.199.111.153
