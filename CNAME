@@ -1,0 +1,4 @@
+Type: CNAME
+Host: www
+Value: uselessdollarcoin.github.io
+TTL: Automatic
