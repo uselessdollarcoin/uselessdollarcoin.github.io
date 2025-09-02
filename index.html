@@ -233,12 +233,71 @@
                 grid-template-columns: 1fr;
             }
         }
+
+            /* Banner Styles */
+        .banner {
+            width: 100%;
+            height: 400px;
+            background-image: url('usdc_banner_img.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .banner-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body>
     <div class="floating-coins"></div>
-    
+
+      <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>$USDC: USELESS DOLLAR COIN</h1>
+            <p>Finally… a coin that admits what every other one hides. the dollar’s worthlessness.  So we put it on-chain and made it tradable.</p>
+
+                        <p>CA: FwnQ5RU5ZULg2m1QzMA5cE8g3PzuGJ8uET9CPXedbonk</p>
+            <p>Rugged by the dev, taken over by the community</p>
+            </div>
+        </div>
+    </section>
+
     <div class="container">
+        <!-- 
         <header>
             <div class="logo">$USDC</div>
             <div class="subtitle">Finally… a coin that admits what every other one hides. the dollar’s worthlessnes. <br> So we put it on-chain and made it tradable.
@@ -247,6 +306,7 @@
             <div class="subtitle">CA: FwnQ5RU5ZULg2m1QzMA5cE8g3PzuGJ8uET9CPXedbonk </div>
             <div class="subtitle">Rugged by the dev, taken over by the community. </div>
         </header>
+        -->
 
         <div class="price-display">
             <div class="price">$0.998</div>
