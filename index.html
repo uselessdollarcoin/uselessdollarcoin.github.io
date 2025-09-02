@@ -49,6 +49,7 @@
             margin-bottom: 30px;
             opacity: 0.9;
             overflow-wrap: break-word;
+            font-weight: bolder;
         }
 
         .price-display {
@@ -238,6 +239,7 @@
             /* Banner Styles */
         .banner {
             width: 100%;
+            max-width: 100%;
             height: auto;
             
             background-image: url('usdc_banner_img.jpeg');
@@ -277,6 +279,8 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        
+            opacity: 0;
         }
 
         .banner p {
@@ -312,37 +316,87 @@
                 text-shadow: none;
             }
         }
+
+ 
+.landing-image-header {
+  width: 100%;
+  text-align: center;
+  padding: 0 0;
+  background-color: #f8f9fa; /* Optional: light background */
+   
+ background: linear-gradient(135deg, #f9c44a 0%);
+
+}
+.landing-image-header img {
+  max-width: 100%;
+  max-height: auto;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}    
+/* For very large screens */
+@media (min-width: 1200px) {
+  .header img {
+    max-width: 400px;
+    max-height: 200px;
+  }
+}
+
+/* For tablets */
+@media (max-width: 768px) {
+  .header img {
+    max-width: 250px;
+    max-height: 125px;
+  }
+  
+  .header {
+    padding: 15px 0;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .header img {
+    max-width: 200px;
+    max-height: 100px;
+  }
+  
+  .header {
+    padding: 10px 0;
+  }
+}
+.landing-img { 
+ 
+  width: 75%;
+  height: 75%;
+  display: block;
+  margin: 0 auto;
+}
+
     </style>
 </head>
 <body>
-    <div class="floating-coins"></div>
+  
 
-      <!-- Banner Section -->
-    <section class="banner">
-        <div class="banner-content">
-            <h1 class="neon-text">$USDC</h1>
-            <p class="neon-text">Finally… a coin that admits what every other one hides, the dollar’s worthlessness. <br> <br> So we put it on-chain and made it tradable.</p>
-            <p class="neon-text">Rugged by the dev, taken over by the community</p>
-            </div>
-        </div>
-    </section>
+ <div class="landing-image-header">
+            <img src="usdc_banner_img.jpeg">
+
+</div>
 
     <div class="container">
-        <!-- 
+      
         <header>
-            <div class="logo">$USDC</div>
-            <div class="subtitle">Finally… a coin that admits what every other one hides. the dollar’s worthlessnes. <br> So we put it on-chain and made it tradable.
+           
+            <div class="subtitle">Finally… a coin that admits what every other coin hides. the dollar’s worthlessnes. <br> So we put it on-chain and made it tradable.
             </div>
 
             <div class="subtitle">CA: FwnQ5RU5ZULg2m1QzMA5cE8g3PzuGJ8uET9CPXedbonk </div>
             <div class="subtitle">Rugged by the dev, taken over by the community. </div>
         </header>
-        -->
-        <center><strong> 
-
-    <div class="subtitle">CA: FwnQ5RU5ZULg2m1QzMA5cE8g3PzuGJ8uET9CPXedbonk </div>
-    </strong>
-        </center>
+        
+        <img class='landing-img'src="usdc_landing_image.jpeg"> 
+ 
 
         <div class="price-display">
             <div class="price">$0.998</div>
@@ -447,7 +501,7 @@
 
         <div class="social-links">
             <a class="social-link" title="Twitter" href="https://x.com/i/communities/1962732489882865871">𝕏</a>
-            <a  class="social-link" title="Discord"href="https://discord.com/invite/NnQsT9kEzY">📱</a>
+            <a  class="social-link" title="Discord"href="https://t.me/uselessdollar">📱</a>
         </div>
 
         <footer>
